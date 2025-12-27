@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import './Register.css'
 function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -31,17 +31,13 @@ function Register() {
     const handlePasswordChange = (e) => {
         const value = e.target.value;
         setPassword(value);
-        setPasswordError(
-            value.length < 6 ? "Password should be at least 6 characters" : ""
-        );
+        setPasswordError(value.length < 6 ? "Password should be at least 6 characters" : "");
     };
 
     const handleConfirmPasswordChange = (e) => {
         const value = e.target.value;
         setConfirmPassword(value);
-        setConfirmPasswordError(
-            value !== password ? "Confirm Password must match the Password" : ""
-        );
+        setConfirmPasswordError(value !== password ? "Confirm Password must match the Password" : "");
     };
 
     const handleRegister = (e) => {
@@ -54,52 +50,57 @@ function Register() {
     };
 
     return (
-        <form onSubmit={handleRegister} style={{ maxWidth: "400px", margin: "auto" }}>
+        <div className="Register-container">
             <h2>Register</h2>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Enter Name"
-                    value={names}
-                    onChange={(e) => { setname(e.target.value) }}
-                />
-            </div>
-            <div>
-                <input
-                    type="email"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={handleEmailChange}
-                />
-                {emailError && <p style={{ color: "red" }}>{emailError}</p>}
-            </div>
+            <form onSubmit={handleRegister} style={{ maxWidth: "400px", margin: "auto" }}>
 
-            <div>
-                <input
-                    type="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                />
-                {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
-            </div>
+                <div className="Register-name">
+                    <input
+                        type="text"
+                        placeholder="Enter Name"
+                        value={names}
+                        onChange={(e) => { setname(e.target.value) }}
+                    />
+                </div>
+                <div className="Register-email">
+                    <input
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={handleEmailChange}
+                    />
+                    {emailError && <p style={{ color: "red" }}>{emailError}</p>}
+                </div>
 
-            <div>
-                <input
-                    type="password"
-                    placeholder="Confirm password"
-                    value={confirmPassword}
-                    onChange={handleConfirmPasswordChange}
-                />
-                {confirmPasswordError && (
-                    <p style={{ color: "red" }}>{confirmPasswordError}</p>
-                )}
-            </div>
+                <div className="Register-password">
+                    <input
+                        type="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
+                </div>
 
-            <button type="submit" disabled={disabled} >
-                Register
-            </button>
-        </form>
+                <div className="Register-confirm-password">
+                    <input
+                        type="password"
+                        placeholder="Confirm password"
+                        value={confirmPassword}
+                        onChange={handleConfirmPasswordChange}
+                    />
+                    {confirmPasswordError && (
+                        <p style={{ color: "red" }}>{confirmPasswordError}</p>
+                    )}
+                </div>
+
+                <button className="Register-btn" type="submit" disabled={disabled} >
+                    Register
+                </button>
+
+            </form>
+
+        </div>
     );
 }
 
