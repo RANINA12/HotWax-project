@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import './Cart.css'
 
 function Cart() {
     const [cart, setCart] = useState([]);
-    const navigate = useNavigate();
-
     useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
         setCart(storedCart);
     }, []);
     return (
-        <div>
+        <div className="cart-page">
             <h1>Cart</h1>
+
             {cart.length === 0 && <p>Cart is empty</p>}
 
-            {cart.map((item, index) => (
-                <div key={index}>
-                    <h4>{item.title}</h4>
-                    <p>₹ {item.price}</p>
-                    <img src={item.image} alt={item.title} width="100" />
-                </div>
-            ))}
+            <div className="cart-grid">
+                {cart.map((item, index) => (
+                    <div className="cart-card" key={index}>
+                        <img src={item.image} alt={item.title} />
+                        <h4>{item.title}</h4>
+                        <p>₹ {item.price}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
+
 }
 
 export default Cart;
